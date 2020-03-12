@@ -6,6 +6,7 @@ This project is an example demo showcasing COVID-19 spreading across the world.
 
 All technologies and data used are entirely publicly accessible.
 
+![image](Screenshot.png)
 
 ### Live demo
 For a live demo, see https://silly-sammet-ee1377.netlify.com/

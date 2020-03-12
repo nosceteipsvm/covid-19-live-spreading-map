@@ -1,29 +1,33 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Map, TileLayer, GeoJSON } from 'react-leaflet';
 import data from '../utilities/worldmap';
-import { CStatsI } from '@/interfaces/stats';
+import { CStatsI } from '../interfaces/stats';
 
 interface StatsPropsI {
 	stats: CStatsI[];
 }
 
 const SpreadingMap: any = ({ stats }: StatsPropsI) => {
-	const primaryColor: string = '#131313';
-	const secondaryColor: string = '#F1F1F1';
-	const highlightColor: string = '#0014f5';
+	const primaryColor: string = '#210881';
+	const secondaryColor: string = '#d72eef';
+	const highlightColor: string = '#562eef';
 
-	const customStyle = {
-    	stroke: true,
-    	color: secondaryColor,
-    	weight: .7,
-        fill: true,
-        fillColor: primaryColor,
-        fillOpacity: 1
-	};
-
-	const handleFeatureEvents = async (feature: any, layer: any) => {
+	const setStyle = (feature: any) => {
 		const cn: string = feature.properties.sovereignt.toLowerCase();
-		const cs: CStatsI = await statsByCountry(cn);
+
+		return {
+			stroke: true,
+			color: secondaryColor,
+			weight: .9,
+			fill: true,
+			fillColor: statsByCountry(cn) !== undefined ? highlightColor : primaryColor,
+			fillOpacity: 1
+		}		
+	}
+
+	const handleFeatures = async (feature: any, layer: any) => {
+		const cn: string = feature.properties.sovereignt;
+		const cs: CStatsI = await statsByCountry(cn.toLowerCase());
 		let tc: string = "";
 		let td: string = "";
 		let tr: string = "";
@@ -36,33 +40,18 @@ const SpreadingMap: any = ({ stats }: StatsPropsI) => {
 
 		await layer.bindPopup(
 			`
-				${feature.properties.sovereignt}</br>
+				${cn}</br>
 				Total cases ${tc !== "" ? tc : "0"}</br>
 				Total deaths ${td !== "" ? td : "0"}</br>
 				Total recovered ${tr !== "" ? tr : "0"}</br>
 			`,
 			{ 'maxWidth': '500', 'className' : 'custom' }
 		);
-
-		layer.on('mouseover', function () {
-			layer.setStyle({
-				'fillColor': tc !== undefined ? highlightColor : primaryColor
-			});
-		});
-
-		layer.on('mouseout', function () {
-			layer.setStyle({
-				'fillColor': primaryColor
-			});
-		});
 	}
 
 	const statsByCountry = (cn: string): CStatsI => {
 		return stats.filter((s: CStatsI) => s.country.toLowerCase() === cn)[0];
 	}
-
-	useEffect(() => {
-	}, []);
 
 	return (
 		<Map
@@ -73,8 +62,8 @@ const SpreadingMap: any = ({ stats }: StatsPropsI) => {
 		>
 			<GeoJSON
 				data={ data }
-				style={ customStyle }
-				onEachFeature={handleFeatureEvents}
+				style={ setStyle }	
+				onEachFeature={ handleFeatures }
 			/>
 		</Map>
 	)

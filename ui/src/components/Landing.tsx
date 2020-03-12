@@ -35,7 +35,7 @@ const Landing: React.FC = () => {
 	return (
 		<div className="flex flex-col justify-center items-center w-full h-full p-4">
 			<h1 className="text-3xl font-black text-gray-200 py-4 my-4 text-center">
-				Coronavirus Live Spreading Map
+				Coronavirus Live Spreading Map 🌎
 			</h1>
 			{ loading && loading ? (
 				<div className="flex flex-col justify-center items-center p-6"
@@ -43,9 +43,9 @@ const Landing: React.FC = () => {
 					 	minHeight: "60vh"
 					 }}
 				>
-					<div class="spinner">
-					  <div class="double-bounce1"></div>
-					  <div class="double-bounce2"></div>
+					<div className="spinner">
+					  <div className="double-bounce1"></div>
+					  <div className="double-bounce2"></div>
 					</div>
 					<p className="text-sm font-light text-gray-600 p-2">
 						Fetching data, please wait

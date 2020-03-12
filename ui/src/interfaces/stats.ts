@@ -3,7 +3,7 @@ export interface GStatsI {
 	deaths: string;
 	last_updated: string;
 	recovered: number;
-	stats_by_country: CStatsI;
+	stats_by_country: CStatsI[];
 }
 
 export interface CStatsI {
