@@ -38,9 +38,10 @@ The frontend consists of a SPA built with React and uses Leaflet to display stat
 
 ## Setup
 
-### Core
-
 Ensure you have Npm(>=6.9.0), Python(3.x) and Pip installed on your system and on your path.
+
+
+Backend
 
 ```
 cd core
@@ -48,7 +49,7 @@ python3 -m pip install -r requirements.txt
 python3 run.py
 ```
 
-### UI
+Frontend
 
 ```
 cd ui
