@@ -24,13 +24,13 @@ The frontend consists of a SPA built with React and uses Leaflet to display stat
 
 ## Technologies used
 
-### Core
+#### Backend
 
 * Python 3.8
 * Flask microframework
 
 
-### UI
+#### Frontend
 
 * React.js and React-Leaflet
 * Tailwind
